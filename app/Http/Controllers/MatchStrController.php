@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\MatchStr;
 use Illuminate\Http\Request;
+use App\Http\Services\MatchService;
 
 class MatchStrController extends Controller
 {
@@ -12,9 +13,20 @@ class MatchStrController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
+    public function __construct(MatchService $matchService)
+    {
+        $this->matchService = $matchService;   
+    }
+
     public function index()
     {
-        //
+        $response = $this->matchService->index();
+
+        $data = [
+            'data' => $response
+        ];
+        
+        return view('match.index', $data);
     }
 
     /**
