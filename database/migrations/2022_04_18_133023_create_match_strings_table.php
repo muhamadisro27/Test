@@ -17,7 +17,6 @@ class CreateMatchStringsTable extends Migration
             $table->id();
             $table->string('match');
             $table->text('text');
-            $table->decimal('total');
             $table->timestamps();
         });
     }
