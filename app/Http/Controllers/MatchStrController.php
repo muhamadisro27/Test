@@ -51,7 +51,6 @@ class MatchStrController extends Controller
     {
         $response = $this->matchService->store($request->all());
 
-        dd($response);
         return redirect()->back()->with($response['status'], $response['message']);
     }
 

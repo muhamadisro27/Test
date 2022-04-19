@@ -15,7 +15,7 @@ class MatchService {
 
    public function index()
    {
-      // return $this->matchInterface->index();
+      return $this->matchInterface->index();
    }
 
    public function store($request)

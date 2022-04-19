@@ -15,11 +15,14 @@ class MatchRepository implements MatchInterface {
 
    public function index() {
       try {
-         $match = MatchString::matchString();
+         $response = MatchString::latest()->first();
       } catch (\Throwable $th) {
-         //throw $th;
+         $response = [
+            'status' => 'failed',
+            'message' => $th->getMessage()
+         ];
       }
-      return 'response';
+      return $response;
    }
 
    public function store() {
