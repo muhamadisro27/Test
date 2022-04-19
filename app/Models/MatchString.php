@@ -12,6 +12,7 @@ class MatchString extends Model
     protected $fillable = [
         'match',
         'text',
+        'matching',
         'total'
     ];
 
@@ -47,9 +48,14 @@ class MatchString extends Model
                         $find_match++;
                     }
                 }
-            }            
-            $result = round(($find_match / $lp)) * 100;
+            }           
+            
+            // akumulasi jumlah kemungkinan string muncul
+            $result = round(($find_match / $lp) * 100);
 
-            return $result;
+            return [
+                'total' => $result,
+                'find_match' => $find_match
+            ];
     }
 }
