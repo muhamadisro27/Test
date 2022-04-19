@@ -7,7 +7,12 @@
              Hi, Admin !
            </a>
            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-             <li><a class="dropdown-item" href="#">Logout</a></li>
+             <li>
+               <form action="{{ route('logout') }}" method="post">
+                @csrf
+                <button class="dropdown-item">Logout</button>
+              </form>
+            </li>
            </ul>
          </li>
        </ul>
