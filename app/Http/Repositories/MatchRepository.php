@@ -15,18 +15,25 @@ class MatchRepository implements MatchInterface {
 
    public function index() {
       try {
-         //code...
+         $match = MatchString::matchString();
       } catch (\Throwable $th) {
          //throw $th;
       }
       return 'response';
    }
 
-   public function store($data) {
+   public function store() {
       try {
          DB::beginTransaction();
 
-         MatchString::matchString();
+         $result = MatchString::matchString();
+         // dd(request('match'));
+         $this->match::create([
+            'match' => request('match'),
+            'text' => request('text'),
+            'matching' => $result['find_match'],
+            'total' => $result['total'],
+         ]);
 
          $response = [
             'status' => 'success',
@@ -39,7 +46,7 @@ class MatchRepository implements MatchInterface {
 
          $response = [
             'status' => 'failed',
-            'message' => 'Gagal menambahkan data!',
+            'message' => $th->getMessage(),
          ];
       }
       return $response;
