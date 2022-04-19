@@ -15,14 +15,12 @@ class MatchService {
 
    public function index()
    {
-      return [
-         'match' => 'parent'
-      ];
+      // return $this->matchInterface->index();
    }
 
    public function store($request)
    {
-      return $this->matchInterface->store($request);
+      return $this->matchInterface->store();
    }
 
 }
