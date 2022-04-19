@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AuthController;
 use App\Http\Controllers\MatchStrController;
 
 /*
@@ -13,5 +14,13 @@ use App\Http\Controllers\MatchStrController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::controller(AuthController::class)->group(function() {
+   Route::get('/login', 'login')->name('login');
+   Route::post('/login','authenticate')->name('authenticate');
+});
 
-Route::resource('/match-strings', MatchStrController::class);
+Route::middleware('auth')->group(function(){
+   Route::resource('/match-strings', MatchStrController::class);
+   Route::post('logout', [AuthController::class, 'logout'])->name('logout');
+});
+
