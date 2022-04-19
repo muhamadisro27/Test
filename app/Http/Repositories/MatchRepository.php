@@ -2,12 +2,14 @@
 
 namespace App\Http\Repositories;
 
-use App\Http\Interfaces\MatchInterface;
 use App\Models\MatchStr;
+use App\Models\MatchString;
+use Illuminate\Support\Facades\DB;
+use App\Http\Interfaces\MatchInterface;
 
 class MatchRepository implements MatchInterface {
 
-   public function __construct(MatchStr $matchStr) {
+   public function __construct(MatchString $matchStr) {
       $this->match = $matchStr;
    }
 
@@ -18,6 +20,29 @@ class MatchRepository implements MatchInterface {
          //throw $th;
       }
       return 'response';
+   }
+
+   public function store($data) {
+      try {
+         DB::beginTransaction();
+
+         MatchString::matchString();
+
+         $response = [
+            'status' => 'success',
+            'message' => 'Berhasil menambahkan data!'
+         ];
+
+         DB::commit();
+      } catch (\Throwable $th) {
+         DB::rollBack();
+
+         $response = [
+            'status' => 'failed',
+            'message' => 'Gagal menambahkan data!',
+         ];
+      }
+      return $response;
    }
 }
 
