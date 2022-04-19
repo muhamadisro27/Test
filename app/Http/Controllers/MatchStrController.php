@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\MatchStr;
+use App\Models\MatchString;
 use Illuminate\Http\Request;
+use App\Http\Requests\MatchRequest;
 use App\Http\Services\MatchService;
 
 class MatchStrController extends Controller
@@ -25,7 +27,7 @@ class MatchStrController extends Controller
         $data = [
             'data' => $response
         ];
-        
+
         return view('match.index', $data);
     }
 
@@ -36,7 +38,7 @@ class MatchStrController extends Controller
      */
     public function create()
     {
-        //
+        
     }
 
     /**
@@ -45,20 +47,12 @@ class MatchStrController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(MatchRequest $request)
     {
-        //
-    }
+        $response = $this->matchService->store($request->all());
 
-    /**
-     * Display the specified resource.
-     *
-     * @param  \App\Models\MatchStr  $matchStr
-     * @return \Illuminate\Http\Response
-     */
-    public function show(MatchStr $matchStr)
-    {
-        //
+        dd($response);
+        return redirect()->back()->with($response['status'], $response['message']);
     }
 
     /**
@@ -67,7 +61,7 @@ class MatchStrController extends Controller
      * @param  \App\Models\MatchStr  $matchStr
      * @return \Illuminate\Http\Response
      */
-    public function edit(MatchStr $matchStr)
+    public function edit(MatchString $matchStr)
     {
         //
     }
@@ -79,7 +73,7 @@ class MatchStrController extends Controller
      * @param  \App\Models\MatchStr  $matchStr
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, MatchStr $matchStr)
+    public function update(Request $request, MatchString $matchStr)
     {
         //
     }
@@ -90,7 +84,7 @@ class MatchStrController extends Controller
      * @param  \App\Models\MatchStr  $matchStr
      * @return \Illuminate\Http\Response
      */
-    public function destroy(MatchStr $matchStr)
+    public function destroy(MatchString $matchStr)
     {
         //
     }
