@@ -15,7 +15,7 @@ use App\Http\Controllers\MatchStrController;
 |
 */
 Route::controller(AuthController::class)->group(function() {
-   Route::get('/login', 'login')->name('login');
+   Route::get('/', 'login')->name('login');
    Route::post('/login','authenticate')->name('authenticate');
 });
 
